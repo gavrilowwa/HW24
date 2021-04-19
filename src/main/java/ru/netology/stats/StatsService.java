@@ -14,19 +14,13 @@ public class StatsService {
     public static long sumCounter(long[] purchases) {
         long sum = 0;
         for (long purch : purchases) {
-            sum = sum + purch;
+            sum += purch;
         }
         return sum;
     }
 
     public static long avgCounter(long[] purchases) {
-        long sum = 0;
-        int counter = 0;
-        for (long purch : purchases) {
-            sum = sum + purch;
-            counter++;
-        }
-        return sum / counter;
+        return (sumCounter(purchases)/purchases.length);
     }
 
     public static long maxPurchMonth(long[] purchases) {
@@ -36,7 +30,6 @@ public class StatsService {
             if (purchases[i] >= maxPurch) {
                 maxPurch = purchases[i];
                 monthNum = i;
-            } else {
             }
         }
         return monthNum;
@@ -49,22 +42,15 @@ public class StatsService {
             if (purchases[i] <= minMonth) {
                 minMonth = purchases[i];
                 monthNum = i;
-            } else {
             }
         }
         return monthNum;
     }
 
     public static long monthLowerAvgCounter(long[] purchases) {
-        long sum = 0;
-        int counter = 0;
         int monthCounter = 0;
         for (long purch : purchases) {
-            sum = sum + purch;
-            counter++;
-        }
-        for (long purch : purchases) {
-            if (purch < (sum / counter)) {
+            if (purch < (avgCounter(purchases))) {
                 monthCounter++;
             }
         }
@@ -72,15 +58,9 @@ public class StatsService {
     }
 
     public static long monthHigherAvgCounter(long[] purchases) {
-        long sum = 0;
-        int counter = 0;
         int monthCounter = 0;
         for (long purch : purchases) {
-            sum = sum + purch;
-            counter++;
-        }
-        for (long purch : purchases) {
-            if (purch > (sum / counter)) {
+            if (purch > (avgCounter(purchases))) {
                 monthCounter++;
             }
         }
